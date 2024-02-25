@@ -10,30 +10,35 @@ ai(1≤i≤N) is an integer between 1 and 100 (inclusive).
 */
 
 
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-int main()
-{
-  int N;
-  int arr[N];
-  cin>>N>>endl;
-  for(int i=0;i<N;i++)
-  {
-    cin>>arr[i];
+
+int main() {
+  int n;
+  cin >> n;
+  vector<int> cards(n);
+  for (int i = 0; i < n; i++) {
+    cin >> cards.at(i);
   }
-  int alice=0;
-  int bob=0;
   
-  for(int i=0;i<N;i++)
-  {
-    if(i%2==0)
-    {
-      alice+=i;
-    }
-    else
-    {
-      bob+=i;
+  for (int i = 0; i < n -1; i++) {
+    if (cards.at(i) < cards.at(i + 1)) {
+      int tmp = cards.at(i);
+      cards.at(i) = cards.at(i + 1);
+      cards.at(i + 1) = tmp;
+      i = -1;
     }
   }
-  cout<<alice-bob<<endl;
+  int alice = 0, bob = 0;
+  for (int i = 0; i < n; i++) {
+    if (i % 2 == 0) {
+      alice += cards.at(i);
+    }
+    else {
+      bob += cards.at(i);
+    }
+  }
+  cout << alice - bob << endl;
+
 }
+
